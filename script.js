@@ -24,6 +24,7 @@ button.addEventListener("click", async (event) => {
   event.preventDefault(); // Prevent form submission
   // Get and trim the user's question
   const userQuestion = input.value.trim();
+  responseDiv.textContent = ""; // Clear previous response
 
   // =====================================
   // STEP 3: Implement Error Handling
@@ -37,6 +38,28 @@ button.addEventListener("click", async (event) => {
   // - Update the responseDiv element to show your message
   // - Use the return keyword to exit the function early
   // YOUR CODE HERE
+  if (!userQuestion) {
+    responseDiv.textContent = "Please enter a question to get your boost on!";
+    return;
+  }
+
+  try{
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${openai_api_key}`
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "user",
+            content: userQuestion
+          }
+        ]
+      })
+    });
 
   // Show loading message while waiting for AI
   responseDiv.textContent = "Thinking...";

@@ -20,7 +20,8 @@ const responseDiv = document.getElementById("response");
 // =====================================
 // STEP 2: Add Event Listener (COMPLETED FOR YOU)
 // =====================================
-button.addEventListener("click", async () => {
+button.addEventListener("click", async (event) => {
+  event.preventDefault(); // Prevent form submission
   // Get and trim the user's question
   const userQuestion = input.value.trim();
 

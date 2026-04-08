@@ -20,8 +20,8 @@ const responseDiv = document.getElementById("response");
 // =====================================
 // STEP 2: Add Event Listener (COMPLETED FOR YOU)
 // =====================================
-button.addEventListener("click", async (event) => {
-  event.preventDefault(); // Prevent form submission
+button.addEventListener("click", async () => {
+  // Prevent form submission
   // Get and trim the user's question
   const userQuestion = input.value.trim();
   responseDiv.textContent = ""; // Clear previous response
@@ -99,11 +99,14 @@ button.addEventListener("click", async (event) => {
     // TODO: Parse the JSON response from the API
     //       Store the result in a variable called 'data'
     // YOUR CODE HERE
-
+      const data = await response.json();
     // TODO: Extract and display the AI's response
     //       OpenAI returns the message in: data.choices[0].message.content
     //       Set responseDiv.textContent to show this to the user
     // YOUR CODE HERE
+     const aiResponse = data.choices[0].message.content;
+
+     responseDiv.textContent = aiResponse;
   } catch (error) {
     // TODO: Handle errors gracefully by doing TWO things:
     //       1. Log the error to the console so you can debug (use console.error)

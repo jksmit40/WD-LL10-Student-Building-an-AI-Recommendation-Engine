@@ -43,23 +43,6 @@ button.addEventListener("click", async (event) => {
     return;
   }
 
-  try{
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${openai_api_key}`
-      },
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "user",
-            content: userQuestion
-          }
-        ]
-      })
-    });
 
   // Show loading message while waiting for AI
   responseDiv.textContent = "Thinking...";
@@ -76,7 +59,7 @@ button.addEventListener("click", async (event) => {
 
   // TODO: Complete the fetch request below to send the user's question to OpenAI
   try {
-    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    
       // TODO: Set the HTTP method to POST (this is required for sending data to the API)
       // YOUR CODE HERE
       // TODO: Add a headers object with TWO properties:
@@ -92,7 +75,22 @@ button.addEventListener("click", async (event) => {
       //           * role: set to "user" (tells AI this is from the user)
       //           * content: use the userQuestion variable (the user's input)
       // YOUR CODE HERE
-    });
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${openai_api_key}`
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "user",
+              content: userQuestion
+            }
+          ]
+        })
+      });
 
     // TODO: Check if the API response was successful
     //       If not successful (!res.ok), throw an error with the status code
